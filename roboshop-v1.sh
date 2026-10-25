@@ -19,7 +19,8 @@ do
 )
 
 echo "$instance ID : $instance_id"
-if [ $instance_id != "frontend" ]
+
+if [ $instance_id != "frontend" ]; then
     IP=$( aws ec2 describe-instances  --instance-ids $instance_id \
            --query 'Reservations[].Instances[].PrivateIpAddress'  --output text
     )
@@ -31,7 +32,7 @@ else
     r53_record = "$domain_name"
 fi
 
-# update R%# record
+# update R53 record
 
 aws route53 change-resource-record-sets \
     --hosted-zone-id $hosted_zone_id \
