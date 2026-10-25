@@ -34,7 +34,7 @@ fi
 
 # update R53 record
 
-aws route53 change-resource-record-sets \
+aws r53_record change-resource-record-sets \
     --hosted-zone-id $hosted_zone_id \
     --change-batch '{
         "Changes": [
