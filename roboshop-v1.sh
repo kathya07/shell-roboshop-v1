@@ -24,12 +24,12 @@ if [ $instance != "frontend" ]; then
     IP=$( aws ec2 describe-instances --instance-ids $instance_id \
          --query 'Reservations[].Instances[].PrivateIpAddress' --output text
     )
-    r53_record="$instance.$domain_name"
+    r53_record="${instance}.${domain_name}"
 else
     IP=$( aws ec2 describe-instances --instance-ids $instance_id \
          --query 'Reservations[].Instances[].PublicIpAddress' --output text
     )
-    r53_record="$domain_name"
+    r53_record="${domain_name}"
 fi
 
 # update R53 record
