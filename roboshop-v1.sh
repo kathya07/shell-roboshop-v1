@@ -9,7 +9,7 @@ for instance in $@
 do 
     echo "Creating an instance: $instance"
 
-    instance_id=(aws ec2 run-instances \
+    instance_id=$(aws ec2 run-instances \
             --image-id $ami_id \
             --instance-type $instance_type \
             --security-group-ids "roboshop-common" "roboshop-$instance" \
