@@ -40,8 +40,8 @@ validate $? "Adding rabbitmq repo"
 dnf install erlang rabbitmq-server -y &>> $logs_file
 validate $? "Installing rabbitmq"
 
-systemctl enable rabbitmq-server $logs_file
-systemctl start rabbitmq-server $logs_file
+systemctl enable rabbitmq-server &>> $logs_file
+systemctl start rabbitmq-server &>> $logs_file
 validate $? " Enable and Start rabbitmq" 
 
 rabbitmqctl add_user roboshop roboshop123 &>> $logs_file
