@@ -59,7 +59,7 @@ validate $? "Downloading the catalogue"
 
 cd /app
 validate $? "go to app dir"
-unzip /tmp/catalogue.zip &>> $logs_file
+unzip /tmp/catalogue.zip 
 validate $? "unzip the application"
 
 npm install &>> $logs_file
