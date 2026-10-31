@@ -86,7 +86,7 @@ validate $? " installing mongo client"
 
 
 # error redirection 1= success, 2 = failure
-product_count=$(mongosh --host <MONGODB-SERVER-IPADDRESS> --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()' 2>> $logs_file)
+product_count=$(mongosh --host "mongodb.$domain_name" --quiet --eval 'db.getSiblingDB("catalogue").products.countDocuments()' 2>> $logs_file)
 validate $? "Connecting to mongodb"
 
 if [ "$product_count" -eq 0]; then
