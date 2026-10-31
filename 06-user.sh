@@ -16,7 +16,7 @@ if [ $user_id -ne 0 ]; then
 fi
 
 mkdir -p $logs_folder
-echo "hello world"
+echo "hello world..."
 
 # echo " script started execution at $(date +"%F %T")" &>> $logs_file
 
