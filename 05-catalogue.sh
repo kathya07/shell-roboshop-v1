@@ -96,5 +96,7 @@ else
     echo -e "$(timestamp) [INFO] products are already loaded..${Y}SKIPPING${N}"
 fi
 
+systemctl restart catalogue
+
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
 echo "$(timestamp) [INFO] =========Script Completed Execution======" | tee -a $logs_file
