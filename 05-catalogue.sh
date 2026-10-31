@@ -71,6 +71,7 @@ cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service &>> $l
 systemctl daemon-reload &>> $logs_file
 systemctl enable catalogue &>> $logs_file
 systemctl start catalogue &>> $logs_file
+validate $? " starting and enabling the service"
 
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
