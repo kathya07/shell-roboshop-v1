@@ -53,20 +53,22 @@ fi
 mkdir -p /app
 validate $? " creating directory"
 
-curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
+curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip   &>> $logs_file
 validate $? "Downloading the catalogue"
 
 cd /app
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>> $logs_file
 validate $? " unzip the application"
 
-npm install
+npm install &>> $logs_file
 validate $? "Installing the application"
 
-sed -i "s/DOMAIN_NAME/$domain_name/g" catalogue.service
-cp "catalogue.service" /etc/systemd/system/catalogue.service
+sed -i "s/DOMAIN_NAME/$domain_name/g" catalogue.service &>> $logs_file
+cp "catalogue.service" /etc/systemd/system/catalogue.service &>> $logs_file
 
-
+systemctl daemon-reload &>> $logs_file
+systemctl enable catalogue &>> $logs_file
+systemctl start catalogue &>> $logs_file
 
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
