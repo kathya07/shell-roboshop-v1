@@ -59,19 +59,22 @@ validate $? "Downloading the catalogue"
 
 cd /app
 validate $? "go to app dir"
-unzip /tmp/catalogue.zip 
-validate $? "unzip the application"
 
-npm install &>> $logs_file
-validate $? "Installing the application"
+# unzip /tmp/catalogue.zip 
+# validate $? "unzip the application"
 
-sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service" &>> $logs_file
-cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service &>> $logs_file
+# npm install &>> $logs_file
+# validate $? "Installing the application"
 
-systemctl daemon-reload &>> $logs_file
-systemctl enable catalogue &>> $logs_file
-systemctl start catalogue &>> $logs_file
-validate $? " starting and enabling the service"
+# sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service" &>> $logs_file
+# cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service &>> $logs_file
+
+# systemctl daemon-reload &>> $logs_file
+# systemctl enable catalogue &>> $logs_file
+# systemctl start catalogue &>> $logs_file
+# validate $? " starting and enabling the service"
+
+# cp
 
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
