@@ -69,7 +69,7 @@ validate $? "unzip the application"
 npm install &>> $logs_file
 validate $? "Installing the application"
 
-sed -i "s/DOMAIN_NAME/"${domain_name}"/g" "$scripts_dir/user.service" &>> $logs_file
+# sed -i "s/DOMAIN_NAME/"${domain_name}"/g" "$scripts_dir/user.service" &>> $logs_file
 cp "$scripts_dir/user.service" /etc/systemd/system/user.service &>> $logs_file
 
 systemctl daemon-reload &>> $logs_file
