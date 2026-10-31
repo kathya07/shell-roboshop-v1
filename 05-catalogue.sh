@@ -90,13 +90,10 @@ product_count=$(mongosh --host "mongodb.$domain_name" --quiet --eval 'db.getSibl
 validate $? "Connecting to mongodb"
 
 if [ "$product_count" -eq 0]; then
-{
     mongosh --host "mongodb.$domain_name" </app/db/master-data.js &>> $logs_file
     validate $? "Loading products"
-}
-else{
+else
     echo -e "$(timestamp) [INFO] products are already loaded..${Y}SKIPPING${N}"
-}
 fi
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
