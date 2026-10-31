@@ -77,12 +77,14 @@ systemctl enable catalogue &>> $logs_file
 systemctl start catalogue &>> $logs_file
 validate $? " starting and enabling the service"
 
-cp "$scripts_dir/mongo.repo" /etc/yum.repos.d/mongo.repo 
+cp "$scripts_dir/mongo.repo" /etc/yum.repos.d/mongo.repo &>> $logs_file
 validate $? "Adding mongo repo"
 
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>> $logs_file
 validate $? " installing mongo client"
 
+mongosh --host "mongodb.$domain_name" </app/db/master-data.js &>> $logs_file
+validate $? "Loading products"
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
 echo "$(timestamp) [INFO] =========Script Completed Execution======" | tee -a $logs_file
