@@ -3,6 +3,7 @@
 user_id=$(id -u)
 logs_folder="/var/logs/roboshop"
 logs_file="${logs_folder}/${0}.log" ## /var/logs/shell-practice/13-logs.sh.log
+domain_name="daws92s.site"
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -48,6 +49,23 @@ if [ $? -ne 0 ]; then
 else
     echo -e "system user already exists...${Y}SKIPPING${N} "
 fi
+
+mkdir -p /app
+validate $? " creating directory"
+
+curl -L -o /tmp/catalogue.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/catalogue-v4.zip
+validate $? "Downloading the catalogue"
+
+cd /app
+unzip /tmp/catalogue.zip
+validate $? " unzip the application"
+
+npm install
+validate $? "Installing the application"
+
+sed -i "s/DOMAIN_NAME/$domain_name/g" catalogue.service
+cp "catalogue.service" /etc/systemd/system/catalogue.service
+
 
 
 
