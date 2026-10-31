@@ -97,5 +97,7 @@ if [ "$product_count" -eq 0]; then
 else{
     echo -e "$(timestamp) [INFO] products are already loaded..${Y}SKIPPING${N}"
 }
+fi
+
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
 echo "$(timestamp) [INFO] =========Script Completed Execution======" | tee -a $logs_file
