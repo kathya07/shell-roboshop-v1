@@ -39,8 +39,15 @@ dnf module enable nodejs:24 -y  &>> $logs_file
 dnf install nodejs -y  &>> $logs_file
 validate $? "Installing node js"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>> $logs_file
-validate $? " creating system user"
+id roboshop  &>> $logs_file
+if [ $? -ne 0 ]; then
+{
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>> $logs_file
+    validate $? " creating system user"
+}
+else
+    echo -e "system user already exists...${Y}SKIPPING${N} "
+fi
 
 
 
