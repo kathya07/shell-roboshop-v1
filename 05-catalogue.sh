@@ -51,6 +51,9 @@ else
     echo -e "system user already exists...${Y}SKIPPING${N} "
 fi
 
+rm -rf /app
+validate $? " removing old code"
+
 mkdir -p /app
 validate $? " creating directory"
 
@@ -60,21 +63,25 @@ validate $? "Downloading the catalogue"
 cd /app
 validate $? "go to app dir"
 
-unzip -o /tmp/catalogue.zip 
+unzip  /tmp/catalogue.zip &>> $logs_file
 validate $? "unzip the application"
 
-# npm install &>> $logs_file
-# validate $? "Installing the application"
+npm install &>> $logs_file
+validate $? "Installing the application"
 
-# sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service" &>> $logs_file
-# cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service &>> $logs_file
+sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/catalogue.service" &>> $logs_file
+cp "$scripts_dir/catalogue.service" /etc/systemd/system/catalogue.service &>> $logs_file
 
-# systemctl daemon-reload &>> $logs_file
-# systemctl enable catalogue &>> $logs_file
-# systemctl start catalogue &>> $logs_file
-# validate $? " starting and enabling the service"
+systemctl daemon-reload &>> $logs_file
+systemctl enable catalogue &>> $logs_file
+systemctl start catalogue &>> $logs_file
+validate $? " starting and enabling the service"
 
-# cp
+cp "$script_dir/mongo.repo" /etc/yum.repos.d/mongo.repo &>> $logs_file
+validate $? "Adding mongo repo"
+
+dnf install mongodb-mongosh -y
+validate $? " installing mongo client"
 
 
 echo "$(timestamp) [INFO] script completed in $SECONDS seconds"
