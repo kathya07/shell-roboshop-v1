@@ -60,7 +60,7 @@ validate $? "Creating directory"
 curl -L -o /tmp/user.zip https://raw.githubusercontent.com/daws-92s/roboshop-documentation/refs/heads/main/artifacts/user-v4.zip   &>> $logs_file
 validate $? "Downloading the user"
 
-cd /app 
+cd /app       
 validate $? "go to app dir"
 
 unzip  /tmp/user.zip &>> $logs_file
