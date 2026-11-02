@@ -9,7 +9,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-if [ $cart_id -ne 0 ]; then
+if [ $user_id -ne 0 ]; then
     echo " please run the script using sudo access"
     exit 1
     
@@ -86,7 +86,7 @@ cp "$scripts_dir/shipping.service" /etc/systemd/system/shipping.service &>> $log
 dnf install mysql -y &>> $logs_file
 validate $? "Install Mysql client"
 
-count=$(mysql -h "mysql.$domain_name" -u root -pRoboShop@1 -N -B -e "SELECT COUNT(*) FROM cities.cities;" 2>>&logs_file)
+count=$(mysql -h "mysql.$domain_name" -u root -pRoboShop@1 -N -B -e "SELECT COUNT(*) FROM cities.cities;" 2>> $logs_file)
 if [ -z "$count" ] || [ "$count" -eq 0 ]; then
     mysql -h mysql.$domain_name -uroot -pRoboShop@1 < /app/db/master-data.sql
     validate $? "Loading shipping data"
