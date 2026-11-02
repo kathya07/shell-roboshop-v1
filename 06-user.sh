@@ -66,7 +66,7 @@ validate $? "go to app dir"
 unzip  /tmp/user.zip &>> $logs_file
 validate $? "unzip the application"
 
-npm install &>> $logs_file
+npm install &>> $logs_file                   
 validate $? "Installing the application"
 
 # sed -i "s/DOMAIN_NAME/"${domain_name}"/g" "$scripts_dir/user.service" &>> $logs_file
