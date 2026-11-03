@@ -54,7 +54,7 @@ unzip /tmp/frontend.zip &>> $logs_file
 validate $? "Downloading and unzipping frontend code"
 
 sed -i "s/DOMAIN_NAME/"$domain_name"/g" "$scripts_dir/roboshop.conf" &>> $logs_file
-cp "$scripts_dir/payment.service" /etc/nginx/default.d/roboshop.conf &>> $logs_file
+cp "$scripts_dir/roboshop.conf" /etc/nginx/default.d/roboshop.conf &>> $logs_file
 validate $? " copied roboshop config"
 
 nginx -t &>> $logs_file
