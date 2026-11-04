@@ -3,6 +3,8 @@
 user_id=$(id -u)
 logs_folder="/var/logs/roboshop"
 logs_file="${logs_folder}/${0}.log" ## /var/logs/shell-practice/13-logs.sh.log
+domain_name="daws92s.site"
+scripts_dir=$( dirname "$(realpath "$0")" )
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
